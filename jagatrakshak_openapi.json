@@ -1,0 +1,1083 @@
+{
+    "openapi":"3.0.3",
+    "info":{
+       "title":"FastAPI",
+       "version":"0.1.0"
+    },
+    "servers": [
+      {
+        "url": "https://jagatrakshak.loca.lt/api"
+      }
+    ],
+    "paths":{
+      "/notify/sms/":{
+         "post":{
+            "summary":"Send SMS Notification",
+            "description":"Send an SMS notification to a specified phone number.",
+            "operationId":"send_sms_notify_sms_post",
+            "requestBody":{
+               "required":true,
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/SMSRequest"
+                     }
+                  }
+               }
+            },
+            "responses":{
+               "200":{
+                  "description":"Successful Response",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type":"string",
+                           "title":"Response Send SMS Notify Sms Post"
+                        }
+                     }
+                  }
+               },
+               "422":{
+                  "description":"Validation Error",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/notify/email/":{
+         "post":{
+            "summary":"Send Email Notification",
+            "description":"Send an email notification to a specified email address with a custom message body and subject.",
+            "operationId":"send_email_notify_email_post",
+            "requestBody":{
+               "required":true,
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/EmailRequest"
+                     }
+                  }
+               }
+            },
+            "responses":{
+               "200":{
+                  "description":"Successful Response",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type":"string",
+                           "title":"Response Send Email Notify Email Post"
+                        }
+                     }
+                  }
+               },
+               "422":{
+                  "description":"Validation Error",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/notify/call/":{
+         "post":{
+            "summary":"Make Call Notification",
+            "description":"Make a call notification to a specified phone number.",
+            "operationId":"make_call_notify_call_post",
+            "requestBody":{
+               "required":true,
+               "content":{
+                  "application/json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/CallRequest"
+                     }
+                  }
+               }
+            },
+            "responses":{
+               "200":{
+                  "description":"Successful Response",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type":"string",
+                           "title":"Response Make Call Notify Call Post"
+                        }
+                     }
+                  }
+               },
+               "422":{
+                  "description":"Validation Error",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/vehicle/findvehicleinfo/{vehicle_number}":{
+         "get":{
+            "summary":"Get vehicle information by vehicle number",
+            "description":"Retrieve vehicle information based on the provided vehicle number.",
+            "operationId":"get_vehicle_info_vehicle_info_get",
+            "parameters":[
+               {
+                  "name":"vehicle_number",
+                  "in":"path",
+                  "required":true,
+                  "schema":{
+                     "type":"string",
+                     "title":"Vehicle Number",
+                     "example":"KA01AB1234"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Successful Response",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/VehicleInfoResponse"
+                        }
+                     }
+                  }
+               },
+               "404":{
+                  "description":"Vehicle not found",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type":"object",
+                           "properties":{
+                              "detail":{
+                                 "type":"string",
+                                 "example":"Vehicle not found"
+                              }
+                           }
+                        }
+                     }
+                  }
+               },
+               "422":{
+                  "description":"Validation Error",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/tavily/search/":{
+         "get":{
+            "summary":"Search using Tavily MCP",
+            "description":"Search using Tavily MCP server.\nThe Tavily MCP server provides: search, extract, map, crawl tools.\nReal-time web search capabilities through the tavily-search tool.\nIntelligent data extraction from web pages via the tavily-extract tool.\nPowerful web mapping tool that creates a structured map of website.\nWeb crawler that systematically explores websites.",
+            "operationId":"search_by_tavily_mcp_search_get",
+            "parameters":[
+               {
+                  "name":"query",
+                  "in":"query",
+                  "required":true,
+                  "schema":{
+                     "type":"string",
+                     "description":"Search query, e.g., 'nearest hospital in Mumbai'"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Successful Response",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type":"object",
+                           "title":"Response Search by Tavily Search Get"
+                        }
+                     }
+                  }
+               },
+               "422":{
+                  "description":"Validation Error",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/users/search/volunteers": {
+         "get": {
+            "summary": "Search for volunteer users",
+            "description": "Search for volunteer users based on various criteria.",
+            "operationId": "search_volunteer_users_get",
+            "parameters": [
+               {
+                  "name": "country",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                     "type": "string",
+                     "description": "Country to filter by"
+                  }
+               },
+               {
+                  "name": "state",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                     "type": "string",
+                     "description": "State to filter by"
+                  }
+               },
+               {
+                  "name": "city",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                     "type": "string",
+                     "description": "City to filter by"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "type": "array",
+                           "items": {
+                              "$ref": "#/components/schemas/UserResponse"
+                           }
+                        }
+                     }
+                  }
+               },
+               "422": {
+                  "description": "Validation Error",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/users/{email_id}": {
+         "get": {
+            "summary": "Get user by email ID",
+            "description": "Retrieve user information using their email ID.",
+            "operationId": "get_user_by_email_id",
+            "parameters": [
+               {
+                  "name": "email_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                     "type": "string"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/UserResponse"
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "User Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/users/by_id/{user_id}": {
+         "get": {
+            "summary": "Get user by ID",
+            "description": "Retrieve user information using their ID.",
+            "operationId": "get_user_by_id",
+            "parameters": [
+               {
+                  "name": "user_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                     "type": "integer"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/UserResponse"
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "User Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/incidents/create": {
+         "post": {
+            "summary": "Create a new incident",
+            "description": "Create a new incident report.",
+            "operationId": "create_incident",
+            "requestBody": {
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/IncidentCreate"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "201": {
+                  "description": "Incident Created Successfully",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/IncidentResponse"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad Request",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/incidents/{incident_id}": {
+         "get": {
+            "summary": "Get incident by ID",
+            "description": "Retrieve incident information using its ID.",
+            "operationId": "get_incident_by_id",
+            "parameters": [
+               {
+                  "name": "incident_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                     "type": "integer"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/IncidentResponse"
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Incident Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/incidents/update/{incident_id}": {
+         "put": {
+            "summary": "Update incident by ID",
+            "description": "Update incident information using its ID.",
+            "operationId": "update_incident_by_id",
+            "parameters": [
+               {
+                  "name": "incident_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                     "type": "integer"
+                  }
+               }
+            ],
+            "requestBody": {
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/IncidentCreate"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Incident Updated Successfully",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/IncidentResponse"
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad Request",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Incident Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/incidents/user/{user_email}": {
+         "get": {
+            "summary": "Get incidents by user email",
+            "description": "Retrieve all incidents reported by a specific user.",
+            "operationId": "get_incidents_by_user_email",
+            "parameters": [
+               {
+                  "name": "user_email",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                     "type": "string"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "type": "array",
+                           "items": {
+                              "$ref": "#/components/schemas/IncidentResponse"
+                           }
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "User Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/incidents/upload-image-urls": {
+         "post": {
+            "summary": "Upload incident images from URLs",
+            "description": "Upload images for an incident using a list of image URLs.",
+            "operationId": "upload_incident_images_from_urls",
+            "requestBody": {
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ImageURLListRequest"
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Images Uploaded Successfully",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "type": "string"
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Incident Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPError"
+                        }
+                     }
+                  }
+               },
+               "422": {
+                  "description": "Validation Error",
+                  "content": {
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/incidents/{incident_id}/images64": {
+         "get": {
+            "summary": "Get incident images by incident ID",
+            "description": "Retrieve all images associated with a specific incident.",
+            "operationId": "get_incident_images_by_id",
+            "parameters": [
+               {
+                  "name": "incident_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                     "type": "integer"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "type": "array",
+                           "items": {
+                              "$ref": "#/components/schemas/IncidentImageResponse"
+                           }
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Incident Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/location/current-location": {
+         "get": {
+            "summary": "Get user current location",
+            "description": "Retrieve the current location of the user.",
+            "operationId": "get_current_location",
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/LocationResponse"
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "User Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPError"
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+    },
+    "components":{
+       "schemas":{
+         "IncidentCreate":{
+            "properties":{
+               "user_email": {
+                  "type": "string",
+                  "example": "alice@example.com"
+               },
+               "incident_place": {
+                  "type": "string",
+                  "example": "Main Street"
+               },
+               "incident_state": {
+                  "type": "string",
+                  "example": "odisha"
+               },
+               "incident_country": {
+                  "type": "string",
+                  "example": "india"
+               },
+               "incident_city": {
+                  "type": "string",
+                  "example": "bhubaneswar"
+               },
+               "incident_type": {
+                  "type": "string",
+                  "example": "road accident"
+               },
+               "victim_type": {
+                  "type": "string",
+                  "example": "self"
+               },
+               "incident_description": {
+                  "type": "string",
+                  "example": "Description of the incident"
+               },
+               "victim_details": {
+                  "type": "string",
+                  "example": "John Doe, 123 Main St, 555-1234"
+               },
+               "incident_status": {
+                  "type": "string",
+                  "example": "inprogress"
+               },
+               "comment": {
+                  "type": "string",
+                  "example": "Additional comments about the incident"
+               }
+            }
+         },
+         "IncidentImageResponse": {
+            "properties": {
+               "id": {
+                  "type": "integer",
+                  "title": "Image ID"
+               },
+               "incident_id": {
+                  "type": "integer",
+                  "title": "Incident ID"
+               },
+               "file_data_base64": {
+                  "type": "string",
+                  "title": "File Data (Base64)"
+               }
+            }
+         },
+         "ImageURLListRequest":{
+            "properties":{
+               "incident_id":{
+                  "type":"integer",
+                  "title":"Incident ID"
+               },
+               "image_urls":{
+                  "type":"array",
+                  "items":{
+                     "type":"string",
+                     "format":"uri"
+                  }
+               }
+            }
+         },
+         "IncidentResponse": {
+            "properties": {
+               "incident_id": {
+                  "type": "integer",
+                  "title": "Incident ID"
+               },
+               "user_email": {
+                  "type": "string",
+                  "title": "User Email"
+               },
+               "created_date": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "Created Date"
+               },
+               "updated_date": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "Updated Date"
+               },
+               "incident_place": {
+                  "type": "string",
+                  "title": "Incident Place"
+               },
+               "incident_state": {
+                  "type": "string",
+                  "title": "Incident State"
+               },
+               "incident_country": {
+                  "type": "string",
+                  "title": "Incident Country"
+               },
+               "incident_city": {
+                  "type": "string",
+                  "title": "Incident City"
+               },
+               "incident_type": {
+                  "type": "string",
+                  "title": "Incident Type"
+               },
+               "incident_description": {
+                  "type": "string",
+                  "title": "Incident Description"
+               },
+               "victim_type": {
+                  "type": "string",
+                  "title": "Victim Type"
+               },
+               "victim_details": {
+                  "type": "string",
+                  "title": "Victim Details"
+               },
+               "incident_status": {
+                  "type": "string",
+                  "title": "Incident Status"
+               },
+               "comment": {
+                  "type": "string",
+                  "title": "Comment"
+               }
+            },
+            "type": "object",
+            "required": [
+               "incident_id",
+               "user_email",
+               "created_date",
+               "updated_date",
+               "incident_place",
+               "incident_state",
+               "incident_country",
+               "incident_city",
+               "incident_type",
+               "victim_type",
+               "incident_status"
+            ],
+            "title": "IncidentResponse"
+         },
+         "UserResponse":{
+             "properties":{
+                "id":{
+                   "type":"integer",
+                   "title":"User Id"
+                },
+                "name":{
+                   "type":"string",
+                   "title":"Name"
+                },
+                "email":{
+                   "type":"string",
+                   "title":"Email"
+                },
+                "city":{
+                   "type":"string",
+                   "title":"City"
+                },
+                "phone":{
+                   "type":"string",
+                   "title":"Phone"
+                }
+             },
+             "type":"object",
+             "required":[
+                "id",
+                "name",
+                "email",
+                "city",
+                "phone"
+             ],
+             "title":"UserResponse"
+          },
+         "SMSRequest":{
+            "properties":{
+               "phone_number":{
+                  "type":"string",
+                  "title":"Phone Number",
+                  "example":"9876543210"
+               },
+               "message":{
+                  "type":"string",
+                  "title":"Message",
+                  "example":"This is a notification message from JagatRakshak Emergency Response System."
+               }
+            },
+            "type":"object",
+            "required":[
+               "phone_number",
+               "message"
+            ],
+            "title":"SMSRequest"
+         },
+         "EmailRequest":{
+            "properties":{
+               "to":{
+                  "type":"string",
+                  "title":"Email",
+                  "example":"user@example.com"
+               },
+               "subject":{
+                  "type":"string",
+                  "title":"Subject",
+                  "example":"Urgent: Action Required"
+               },
+               "body":{
+                  "type":"string",
+                  "title":"Body",
+                  "example":"This is a notification email from JagatRakshak Emergency Response System."
+               }
+            },
+            "type":"object",
+            "required":[
+               "to",
+               "subject",
+               "body"
+            ],
+            "title":"EmailRequest"
+         },
+         "CallRequest":{
+            "properties":{
+               "phone_number":{
+                  "type":"string",
+                  "title":"Phone Number",
+                  "example":"9876543210"
+               },
+               "message":{
+                  "type":"string",
+                  "title":"Message",
+                  "example":"This is a notification call from JagatRakshak Emergency Response System."
+               }
+            },
+            "type":"object",
+            "required":[
+               "phone_number",
+               "message"
+            ],
+            "title":"CallRequest"
+         },
+         "VehicleInfoResponse":{
+            "properties":{
+               "vehicle_number":{
+                  "type":"string",
+                  "title":"Vehicle Number",
+                  "example":"KA01AB1234"
+               },
+               "owner_name":{
+                  "type":"string",
+                  "title":"Owner Name",
+                  "example":"John Doe"
+               },
+               "vehicle_type":{
+                  "type":"string",
+                  "title":"Vehicle Type",
+                  "example":"Car"
+               },
+               "model":{
+                  "type":"string",
+                  "title":"Model",
+                  "example":"Toyota Camry"
+               },
+               "registration_date":{
+                  "type":"string",
+                  "title":"Registration Date",
+                  "example":"2020-01-01"
+               },
+               "rto_office":{
+                  "type":"string",
+                  "title":"RTO Office",
+                  "example":"Bangalore RTO"
+               },
+               "contact_number":{
+                  "type":"string",
+                  "title":"Contact Number",
+                  "example":"9876543210"
+               },
+               "address":{
+                  "type":"string",
+                  "title":"Address",
+                  "example":"123 Main St, Bangalore, Karnataka"
+               }
+            },
+            "type":"object",
+            "required":[
+               "vehicle_number",
+               "owner_name",
+               "vehicle_type",
+               "model",
+               "registration_date",
+               "rto_office",
+               "contact_number",
+               "address"
+            ],
+            "title":"VehicleInfoResponse"
+         },
+         "LocationResponse":{
+            "properties":{
+               "message":{
+                  "type":"string",
+                  "title":"Message",
+                  "example":"User current location retrieved successfully"
+               },
+               "city":{
+                  "type":"string",
+                  "title":"City",
+                  "example":"Berhampur"
+               },
+               "state":{
+                  "type":"string",
+                  "title":"State",
+                  "example":"Odisha"
+               },
+               "country":{
+                  "type":"string",
+                  "title":"Country",
+                  "example":"India"
+               },
+               "address":{
+                  "type":"string",
+                  "title":"Address",
+                  "example":"near new bus stand, Berhampur"
+               },
+               "timestamp":{
+                  "type":"string",
+                  "format":"date-time",
+                  "title":"Timestamp",
+                  "example":"2025-08-16T01:40:09.526724"
+               },
+               "maps_url":{
+                  "type":"string",
+                  "title":"Maps URL",
+                  "example":"https://www.google.com/maps?q=19.3149,84.7941"
+               }
+            },
+            "type":"object",
+            "required":[
+               "message",
+               "city",
+               "state",
+               "country",
+               "address",
+               "timestamp",
+               "maps_url"
+            ],
+            "title":"LocationResponse"
+         },
+         "ValidationError":{
+            "properties":{
+               "loc":{
+                  "items":{
+                     "type":"string"
+                  },
+                  "type":"array",
+                  "title":"Location"
+               },
+               "msg":{
+                  "type":"string",
+                  "title":"Message"
+               },
+               "type":{
+                  "type":"string",
+                  "title":"Error Type"
+               }
+            },
+            "type":"object",
+            "required":[
+               "loc",
+               "msg",
+               "type"
+            ],
+            "title":"ValidationError"
+         },
+         "HTTPError":{
+            "properties":{
+               "detail":{
+                  "type":"string",
+                  "title":"Detail",
+                  "example":"User not found"
+               }
+            },
+            "type":"object",
+            "title":"HTTPError"
+         },
+         "HTTPValidationError":{
+            "properties":{
+               "detail":{
+                  "items":{
+                     "$ref":"#/components/schemas/ValidationError"
+                  },
+                  "type":"array",
+                  "title":"Detail"
+               }
+            },
+            "type":"object",
+            "title":"HTTPValidationError"
+         }
+       }
+    }
+ }

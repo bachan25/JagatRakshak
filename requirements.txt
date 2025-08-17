@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+twilio
+requests
+sqlalchemy
+aiosqlite
+httpx
+pydantic[email]
+pandas
+websockets
+python-jose[cryptography] 
+passlib[bcrypt]
+python-multipart
